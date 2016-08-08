@@ -10,6 +10,14 @@ export default class Todos extends React.Component {
       todos: TodoStore.getAll()
     };
   }
+  componentWillMount(){
+    // new es6 arrow function automatically binds to this
+    TodoStore.on( 'change', () => {
+      this.setState({
+        todos: TodoStore.getAll()
+      });
+    });
+  }
   render() {
     const { todos } = this.state;
 
