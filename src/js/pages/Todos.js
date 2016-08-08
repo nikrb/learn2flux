@@ -7,7 +7,7 @@ import TodoStore from "../stores/TodoStore";
 export default class Todos extends React.Component {
   constructor(){
     super();
-    // TODO: omg really? so we all use this object!
+    // TODO: omg really? so all callers use this object!
     this.getTodos = this.getTodos.bind(this);
     this.state = {
       todos: TodoStore.getAll()
@@ -16,6 +16,7 @@ export default class Todos extends React.Component {
   componentWillMount(){
     // new es6 arrow function automatically binds to this
     TodoStore.on( 'change', this.getTodos);
+    this.reloadTodos();
     // just to be sure
     console.log( "listener count (should be one)",
                   TodoStore.listenerCount( 'change'));
