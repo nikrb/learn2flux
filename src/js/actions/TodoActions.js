@@ -1,4 +1,5 @@
 import dispatcher from "../dispatcher";
+import axios from "axios";
 
 export function createTodo( text){
   dispatcher.dispatch({
@@ -15,34 +16,14 @@ export function deleteTodo( id){
 }
 
 export function reloadTodos(){
-  /* TODO: *finally* hook up to mongo via api
-  // lol "or use jquery ajax if you're *still* using that"
-  axios( "/api/todos")
-  .then( (data) => {
-    console.log( "get the data", data);
-  });
-  */
   dispatcher.dispatch( { type: "FETCH_TODOS"});
-  setTimeout(() => {
-    dispatcher.dispatch({ type: "RECEIVE_TODOS", todos: [
-        {
-          id: 113464613,
-          text: "Go Shopping Again",
-          complete : false
-        },
-        {
-          id:235684679,
-          text: "Hug the wife",
-          complete: true
-        }
-    ]});
-  }, 1000);
+  // lol "or use jquery ajax if you're *still* using that"
+  axios( "/api/todo")
+  .then( (response) => {
+    console.log( "get the data", response.data);
+    dispatcher.dispatch( {type: "RECEIVE_TODOS", todos: response.data});
+  })
+  .catch( (err) => {
+    console.error( "todo fetch failed:", err);
+  });
 }
-
-/* es5
-export default {
-  createTodo : function(){
-
-  }
-}
-*/

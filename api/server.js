@@ -5,7 +5,7 @@ var MongoClient = require('mongodb').MongoClient;
 var ObjectId = require('mongodb').ObjectID;
 
 var db;
-var url = 'mongodb://localhost:27017/commentsdb';
+var url = 'mongodb://localhost:27017/todosdb';
 MongoClient.connect(url, function(err, dbc) {
   if( err){
     console.log( "mongo connect error:", err);
@@ -33,31 +33,30 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.get('/api/comments', function(req, res) {
-  db.collection("comments").find({}).toArray(function(err, docs) {
+app.get('/api/todo', function(req, res) {
+  db.collection("todos").find({}).toArray(function(err, docs) {
     if( err){
-      console.log( "GET /api/comments failed:", err)
+      console.error( "GET /api/todo failed:", err)
     } else {
-      console.log( "get/api/comments results:", docs);
+      console.log( "get/api/todo results:", docs);
       res.json(docs);
     }
   });
 });
 
-app.post('/api/comments', function(req, res) {
-  var newComment = {
-    created: new Date( req.body.created),
-    author: req.body.author,
+app.post('/api/todo', function(req, res) {
+  let newTodo = {
     text: req.body.text,
+    complete: false
   };
-  console.log( "creating new comment:", newComment);
-  db.collection("comments").insertOne(newComment, function(err, result) {
+  console.log( "creating new todo:", newTodo);
+  db.collection("todos").insertOne(newTodo, function(err, result) {
     if( err){
-      console.log( "POST /api/comments failed:", err);
+      console.log( "POST /api/todo failed:", err);
     } else {
-      var newId = result.insertedId;
+      const newId = result.insertedId;
       console.log( "new comment id:", newId);
-      res.json( { new_id: newId, created: newComment.created });
+      res.json( { id: newId, text: newTodo.text, complete: newTodo.complete });
     }
   });
 });
