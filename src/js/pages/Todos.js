@@ -7,16 +7,26 @@ import TodoStore from "../stores/TodoStore";
 export default class Todos extends React.Component {
   constructor(){
     super();
+    // TODO: omg really? so we all use this object!
+    this.getTodos = this.getTodos.bind(this);
     this.state = {
       todos: TodoStore.getAll()
     };
   }
   componentWillMount(){
     // new es6 arrow function automatically binds to this
-    TodoStore.on( 'change', () => {
-      this.setState({
-        todos: TodoStore.getAll()
-      });
+    TodoStore.on( 'change', this.getTodos);
+    // just to be sure
+    console.log( "listener count (should be one)",
+                  TodoStore.listenerCount( 'change'));
+  }
+  componentWillUnmount(){
+    // prevent memory leak by removing the listener
+    TodoStore.removeListener( 'change', this.getTodos);
+  }
+  getTodos(){
+    this.setState({
+      todos: TodoStore.getAll()
     });
   }
   createTodo(){
