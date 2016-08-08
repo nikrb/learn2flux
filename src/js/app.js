@@ -5,8 +5,8 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 import Bootstrap from 'bootstrap-without-jquery';
 
 import Layout from './pages/Layout';
-import Featured from './pages/Favourites';
-import Archives from './pages/Todos';
+import Favourites from './pages/Favourites';
+import Todos from './pages/Todos';
 import Settings from './pages/Settings';
 
 const app = document.getElementById('app');
