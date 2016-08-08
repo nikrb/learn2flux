@@ -10,6 +10,7 @@
     "body-parser": "^1.15.1",
     "bootstrap-without-jquery": "^1.0.4",
     "express": "~3.2.4",
+    "flux": "^2.1.1",
     "history": "^1.17.0",
     "react-router": "^2.6.1",
     "socket.io": "~0.9.14"
