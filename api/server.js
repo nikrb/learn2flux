@@ -56,7 +56,7 @@ app.post('/api/todo', function(req, res) {
     } else {
       const newId = result.insertedId;
       console.log( "new comment id:", newId);
-      res.json( { id: newId, text: newTodo.text, complete: newTodo.complete });
+      res.json( { _id: newId, text: newTodo.text, complete: newTodo.complete });
     }
   });
 });
