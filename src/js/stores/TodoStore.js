@@ -32,10 +32,15 @@ class TodoStore extends EventEmitter {
   }
 
   handleActions( action){
+    // TODO: new syntax for switch? no break using {}
     switch( action.type){
-      case "CREATE_TODO":
+      case "CREATE_TODO":{
         this.createTodo( action.text);
-      break;
+      }
+      case "RECEIVE_TODOS":{
+        this.todos = action.todos;
+        this.emit("change");
+      }
     }
   }
 }

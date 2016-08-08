@@ -23,6 +23,9 @@ export default class Todos extends React.Component {
     // TODO: add an input field and grab the text
     TodoActions.createTodo( Date.now());
   }
+  reloadTodos(){
+    TodoActions.reloadTodos();
+  }
   render() {
     const { todos } = this.state;
 
@@ -32,8 +35,8 @@ export default class Todos extends React.Component {
 
     return (
       <div>
-        <button onClick={this.createTodo.bind(this)}>
-          Create!
+        <button onClick={this.reloadTodos.bind(this)}>
+          Reload
         </button>
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
