@@ -6,6 +6,7 @@ export default class Todo extends React.Component {
   }
 
   render() {
+    // TODO: implement edit
     const { complete, edit, text } = this.props;
 
     const icon = complete ? "\u2714" : "\u2716"
