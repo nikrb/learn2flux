@@ -55,7 +55,7 @@ app.post('/api/todo', function(req, res) {
       console.log( "POST /api/todo failed:", err);
     } else {
       const newId = result.insertedId;
-      console.log( "new comment id:", newId);
+      console.log( "new todo id:", newId);
       res.json( { _id: newId, text: newTodo.text, complete: newTodo.complete });
     }
   });
