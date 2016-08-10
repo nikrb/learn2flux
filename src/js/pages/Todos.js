@@ -50,9 +50,7 @@ export default class Todos extends React.Component {
 
     return (
       <div>
-        <button onClick={this.createTodo.bind(this)}>
-          New Todo:
-        </button>
+        <button onClick={this.createTodo.bind(this)}>New Todo:</button>
         <input value={newTodoText} onChange={this.changeNewTodoText.bind(this)} />
         <TodoList todos={todos} />
       </div>
