@@ -1,6 +1,7 @@
 import React from "react";
 
 import Todo from "../components/Todo";
+import TextEntry from "../components/Todo/TextEntry";
 import * as TodoActions from "../actions/TodoActions";
 import TodoStore from "../stores/TodoStore";
 
@@ -53,10 +54,8 @@ export default class Todos extends React.Component {
 
     return (
       <div>
-        <button onClick={this.createTodo.bind(this)}>
-          New Todo:
-        </button>
-        <input value={this.state.newTodoText} onChange={this.changeNewTodoText.bind(this)} />
+        <TextEntry textChange={this.changeNewTodoText.bind(this)}
+                    buttonClick={this.createTodo.bind(this)} />
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
       </div>
