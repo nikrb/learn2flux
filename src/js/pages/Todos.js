@@ -10,10 +10,13 @@ export default class Todos extends React.Component {
     // TODO: omg really? so all callers use this object!
     this.getTodos = this.getTodos.bind(this);
     this.state = {
-      todos: TodoStore.getAll()
+      todos: [], // TodoStore.getAll()
+      newTodoText: ""
     };
+    console.log( "intial todo state:", this.state);
   }
   componentWillMount(){
+    console.log( "@Todos.componentWillMount");
     // new es6 arrow function automatically binds to this
     TodoStore.on( 'change', this.getTodos);
     this.reloadTodos();
@@ -30,15 +33,19 @@ export default class Todos extends React.Component {
       todos: TodoStore.getAll()
     });
   }
-  createTodo(){
+  changeNewTodoText(e){
+    this.setState( { newTodoText : e.target.value});
+  }
+  createTodo(e){
     // TODO: add an input field and grab the text
-    TodoActions.createTodo( Date.now());
+    TodoActions.createTodo( this.state.newTodoText);
   }
   reloadTodos(){
     TodoActions.reloadTodos();
   }
   render() {
-    const { todos } = this.state;
+    console.log( "render todos:", this.state);
+    const { todos}  = this.state;
 
     const TodoComponents = todos.map((todo) => {
         return <Todo key={todo._id} {...todo}/>;
@@ -46,9 +53,10 @@ export default class Todos extends React.Component {
 
     return (
       <div>
-        <button onClick={this.reloadTodos.bind(this)}>
-          Reload
+        <button onClick={this.createTodo.bind(this)}>
+          New Todo:
         </button>
+        <input value={this.state.newTodoText} onChange={this.changeNewTodoText.bind(this)} />
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
       </div>

@@ -7,12 +7,12 @@ class TodoStore extends EventEmitter {
     super();
     this.todos = [];
   }
-  createTodo( text){
-    const id = Date.now();
+  createTodo( _id, text, complete){
+    console.log( "@TodoStore.createTodo emit change and push id[%s] text[%s] complete[%s]", _id, text, complete);
     this.todos.push( {
-      id : id,
+      _id,
       text,
-      complete: false
+      complete
     });
     this.emit( "change");
   }
@@ -24,7 +24,8 @@ class TodoStore extends EventEmitter {
     // TODO: new syntax for switch? no break using {}
     switch( action.type){
       case "CREATE_TODO":{
-        this.createTodo( action.text);
+        console.log( "@TodoStore.handleActions received dispatcher CREATE_TODO")
+        this.createTodo( action._id, action.text, action.complete);
       }
       case "RECEIVE_TODOS":{
         this.todos = action.todos;
