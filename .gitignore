@@ -42,4 +42,4 @@ dist/*
 # keep the index html file
 !dist/index.html
 
-webpack.config.js.bakup
+bakup/
