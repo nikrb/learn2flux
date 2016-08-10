@@ -1,6 +1,7 @@
 import React from "react";
 
-import Todo from "../components/Todo";
+// import Todo from "../components/Todo";
+import TodoList from "../components/Todo/TodoList";
 import * as TodoActions from "../actions/TodoActions";
 import TodoStore from "../stores/TodoStore";
 
@@ -47,18 +48,13 @@ export default class Todos extends React.Component {
     const { todos, newTodoText}  = this.state;
     console.log( "@Todos.render todos count[%d] new text[%s]", todos.length, newTodoText);
 
-    const TodoComponents = todos.map((todo) => {
-        return <Todo key={todo._id} {...todo}/>;
-    });
-
     return (
       <div>
         <button onClick={this.createTodo.bind(this)}>
           New Todo:
         </button>
         <input value={newTodoText} onChange={this.changeNewTodoText.bind(this)} />
-        <h1>Todos</h1>
-        <ul>{TodoComponents}</ul>
+        <TodoList todos={todos} />
       </div>
     );
   }
