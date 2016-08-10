@@ -44,8 +44,8 @@ export default class Todos extends React.Component {
     TodoActions.reloadTodos();
   }
   render() {
-    console.log( "render todos:", this.state);
-    const { todos}  = this.state;
+    const { todos, newTodoText}  = this.state;
+    console.log( "@Todos.render todos count[%d] new text[%s]", todos.length, newTodoText);
 
     const TodoComponents = todos.map((todo) => {
         return <Todo key={todo._id} {...todo}/>;
@@ -56,7 +56,7 @@ export default class Todos extends React.Component {
         <button onClick={this.createTodo.bind(this)}>
           New Todo:
         </button>
-        <input value={this.state.newTodoText} onChange={this.changeNewTodoText.bind(this)} />
+        <input value={newTodoText} onChange={this.changeNewTodoText.bind(this)} />
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
       </div>
