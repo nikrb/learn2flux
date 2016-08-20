@@ -1,5 +1,8 @@
 working through learncode.academy "react JS tutorial" on youtube
-starting with my finally cobbled together server with backend to mongo.
+checkout the different branches, the names roughly match the videos.
+
+Starting with my finally cobbled together server with backend to mongo.
+There is NO server side rendering here ... I don't think so anyway haha!
 To start:
 
 1. get mongo running
